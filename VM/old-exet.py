@@ -20,11 +20,6 @@ firebase_admin.initialize_app(cred, {
 
 cli = Redis('localhost')
 
-rdb = Redis(
-    host='redis-11474.c10.us-east-1-2.ec2.cloud.redislabs.com',
-    port=11474,
-    password='IwNcW6koViX3AowEKOTNAb35tEcJwvsL')
-
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="BlindCV-0869c1c7984f.json"
 client = vision.ImageAnnotatorClient()
 
@@ -36,12 +31,12 @@ def gettext():
     reply = client.text_detection(image=image)
     labels = reply.text_annotations
     d = enchant.Dict("en_US")
-    try:
+    try:    
         text = next(iter(labels)).description
         words = (text.replace("\n", " ")).split(" ")
         for i in range(len(words)):
             words[i] = (re.sub(r"[^a-zA-Z0-9]","",words[i])).lower()
-        words = list(filter(None, words))
+        words = list(filter(None, words)) 
         response = ""
         for i in range(len(words)-1, -1, -1):
             if not d.check(words[i]):
@@ -55,3 +50,14 @@ def gettext():
 
 init = 0
 prev = 0
+
+while(True):
+    init = int(cli.get('read').decode('utf-8'))
+    s = time.time()
+    if init != prev:
+        text = gettext()
+        print(text)
+        ref = db.reference()
+        ref.update({"text":text})
+        print("text time:", time.time() - s, "\n")
+    prev = init
