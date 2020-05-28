@@ -47,37 +47,33 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://fire-30e38.firebaseio.com/'
 })
 '''
-def v3():
-    init = 0
-    prev = 0    
-
-    while(True):
-        init = int(cli.get('read').decode('utf-8'))
-        if init != prev:
-            start = time.time()
-            with open("send.png", "rb") as image:
-                f = image.read()
-                b = bytearray(f)
-                jsonstring = (client2.invoke_endpoint(
-                EndpointName='sample-endpoint-134EEA74-A9CA-4B4F-8DB1-B9721EEFC63B-2',\
-                Body=b,\
-                ContentType="image/png",
-                ))['Body'].read().decode("utf-8")
-                jsonstring = json.loads(jsonstring)
-                listofargs = []
-                for i in jsonstring:
-                    secondlist = []
-                    secondlist.append(i["id"])
-                    secondlist.append(i["score"] * 100)
-                    secondlist.append([i["top"],i["left"],(int(i["right"])-int(i["left"])),(int(i["bottom"])-int(i["top"]))])
-                    listofargs.append(secondlist)
+def v3(prev):
+    init = int(cli.get('read').decode('utf-8'))
+    if init != prev:
+        start = time.time()
+        with open("send.png", "rb") as image:
+            f = image.read()
+            b = bytearray(f)
+            jsonstring = (client2.invoke_endpoint(
+            EndpointName='sample-endpoint-134EEA74-A9CA-4B4F-8DB1-B9721EEFC63B-2',\
+            Body=b,\
+            ContentType="image/png",
+            ))['Body'].read().decode("utf-8")
+            jsonstring = json.loads(jsonstring)
+            listofargs = []
+            for i in jsonstring:
+                secondlist = []
+                secondlist.append(i["id"])
+                secondlist.append(i["score"] * 100)
+                secondlist.append([i["top"],i["left"],(int(i["right"])-int(i["left"])),(int(i["bottom"])-int(i["top"]))])
+                listofargs.append(secondlist)
 #                print("yolo", listofargs)
-                cli.set('writev3', str(listofargs))
-            cint = int(cli.get('confirm').decode('utf-8'))
-            cint += 1
-            cli.set('confirm', cint)
-            print('v3 time:', time.time() - start)
-        prev = init
+            cli.set('writev3', str(listofargs))
+        cint = int(cli.get('confirm').decode('utf-8'))
+        cint += 1
+        cli.set('confirm', cint)
+        print('v3 time:', time.time() - start)
+    return init
 
 def pythia():
     os.system("python3 runpythia.py")
@@ -88,88 +84,80 @@ def caption():
 def exe():
     os.system("python3 exec.py")
 
-def mrcnn():
-    init = 0
-    prev = 0
+def mrcnn(prev):
+    init = int(cli.get('read').decode('utf-8'))
+    if init != prev:
+        start = time.time()
+        with open("send.png", "rb") as image:
+            f = image.read()
+            b = bytearray(f)
+            jsonstring = (client2.invoke_endpoint(
+            EndpointName='sample-endpoint-134EEA74-A9CA-4B4F-8DB1-B9721EEFC63B-1',\
+            Body=b,\
+            ContentType="image/png",
+            ))['Body'].read().decode("utf-8")
+            jsonstring = json.loads(jsonstring)
+            listofargs = []
+            for i in jsonstring:
+                secondlist = []
+                secondlist.append(i["id"])
+                secondlist.append(i["score"] * 100)
+                secondlist.append([i["top"],i["left"],(int(i["right"])-int(i["left"])),(int(i["bottom"])-int(i["top"]))])
+                listofargs.append(secondlist)
+#               print("rcnn", listofargs)
+            cli.set('writemrcnn', str(listofargs))
+        cint = int(cli.get('confirm').decode('utf-8'))
+        cint += 1
+        cli.set('confirm', cint)
+        print('v3 time:', time.time() - start)
+    return init
+def text(prev):
+    init = int(cli.get('read').decode('utf-8'))
+    s = time.time()
+    if init != prev:
+        with open("send.png", "rb") as image:
+            f = image.read() 
+            b = bytearray(f)
+            response = client3.detect_document_text(
+            Document={
+                'Bytes': b
+            }
+            )
+            columns = []
+            lines = []
+            for item in response["Blocks"]:
+                if item["BlockType"] == "LINE":
+                    column_found=False
+                    for index, column in enumerate(columns):
+                        bbox_left = item["Geometry"]["BoundingBox"]["Left"]
+                        bbox_right = item["Geometry"]["BoundingBox"]["Left"] + item["Geometry"]["BoundingBox"]["Width"]
+                        bbox_centre = item["Geometry"]["BoundingBox"]["Left"] + item["Geometry"]["BoundingBox"]["Width"]/2
+                        column_centre = column['left'] + column['right']/2
 
-    while(True):
-        init = int(cli.get('read').decode('utf-8'))
-        if init != prev:
-            start = time.time()
-            with open("send.png", "rb") as image:
-                f = image.read()
-                b = bytearray(f)
-                jsonstring = (client2.invoke_endpoint(
-                EndpointName='sample-endpoint-134EEA74-A9CA-4B4F-8DB1-B9721EEFC63B-1',\
-                Body=b,\
-                ContentType="image/png",
-                ))['Body'].read().decode("utf-8")
-                jsonstring = json.loads(jsonstring)
-                listofargs = []
-                for i in jsonstring:
-                    secondlist = []
-                    secondlist.append(i["id"])
-                    secondlist.append(i["score"] * 100)
-                    secondlist.append([i["top"],i["left"],(int(i["right"])-int(i["left"])),(int(i["bottom"])-int(i["top"]))])
-                    listofargs.append(secondlist)
- #               print("rcnn", listofargs)
-                cli.set('writemrcnn', str(listofargs))
-            cint = int(cli.get('confirm').decode('utf-8'))
-            cint += 1
-            cli.set('confirm', cint)
-            print('v3 time:', time.time() - start)
-        prev = init
+                        if (bbox_centre > column['left'] and bbox_centre < column['right']) or (column_centre > bbox_left and column_centre < bbox_right):
+                            lines.append([index, item["Text"]])
+                            column_found=True
+                            break
+                    if not column_found:
+                        columns.append({'left':item["Geometry"]["BoundingBox"]["Left"], 'right':item["Geometry"]["BoundingBox"]["Left"] + item["Geometry"]["BoundingBox"]["Width"]})
+                        lines.append([len(columns)-1, item["Text"]])
 
-def text():
-    init = 0
-    prev = 0
+            lines.sort(key=lambda x: x[0])
+            text = ""
+            for line in lines:
+                text = text+line[1]
+                text = text + '\n'
+            text = text.strip()
 
-    while(True):	
-        init = int(cli.get('read').decode('utf-8'))
-        s = time.time()
-        if init != prev:
-            with open("send.png", "rb") as image:
-                f = image.read() 
-                b = bytearray(f)
-                response = client3.detect_document_text(
-                Document={
-                    'Bytes': b
-                }
-                )
-                columns = []
-                lines = []
-                for item in response["Blocks"]:
-                    if item["BlockType"] == "LINE":
-                        column_found=False
-                        for index, column in enumerate(columns):
-                            bbox_left = item["Geometry"]["BoundingBox"]["Left"]
-                            bbox_right = item["Geometry"]["BoundingBox"]["Left"] + item["Geometry"]["BoundingBox"]["Width"]
-                            bbox_centre = item["Geometry"]["BoundingBox"]["Left"] + item["Geometry"]["BoundingBox"]["Width"]/2
-                            column_centre = column['left'] + column['right']/2
-
-                            if (bbox_centre > column['left'] and bbox_centre < column['right']) or (column_centre > bbox_left and column_centre < bbox_right):
-                                lines.append([index, item["Text"]])
-                                column_found=True
-                                break
-                        if not column_found:
-                            columns.append({'left':item["Geometry"]["BoundingBox"]["Left"], 'right':item["Geometry"]["BoundingBox"]["Left"] + item["Geometry"]["BoundingBox"]["Width"]})
-                            lines.append([len(columns)-1, item["Text"]])
-
-                lines.sort(key=lambda x: x[0])
-                text = ""
-                for line in lines:
-                    text = text+line[1]
-                    text = text + '\n'
-                text = text.strip()
-
-            print(text)
-            ''''
-            ref = db.reference()
-            ref.update({"text":text})'''
-            print(text)
-            cli.set('text', text)
-            print("text time:", time.time() - s, "\n")
-        prev = init
+        print(text)
+        ''''
+        ref = db.reference()
+        ref.update({"text":text})'''
+        print(text)
+        cli.set('text', text)
+        print("text time:", time.time() - s, "\n")
+    return init
+    
 
 def search():
     os.system("python3 exes.py")
@@ -262,18 +250,30 @@ def reset():
 
 if __name__ == '__main__':
     reset()
-    p3 = Process(target=v3)
-    p3.start()
-    p4 = Process(target=mrcnn)
-    p4.start()
-    p5 = Process(target=text)
-    p5.start()
-    p6 = Process(target=search)
-    p6.start()
-    p7 = Process(target=once)
+	yolo = 0
+	rcnn = 0
+	textp = 0
+	redis_conn = Redis()
+	q = Queue(connection=redis_conn)
+	while(True):
+		job = q.enqueue(v3, yolo)
+		while(job.result is None):
+			pass
+		yolo = job.result
+		job = q.enqueue(mrcnn, rcnn)
+		while(job.result is None):
+			pass
+		rcnn = job.result
+		job = q.enqueue(text, textp)
+		while(job.result is None):
+			pass
+		textp = job.result
+	p7 = Process(target=once)
     p7.start()
+    p8 = Process(target=check)
+    p8.start()
+    
 #    p8 = Process(target=pythia)
 #    p8.start()
 #    p9 = Process(target=caption)
 #    p9.start()
-    check()
