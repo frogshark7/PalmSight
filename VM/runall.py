@@ -235,7 +235,7 @@ def once():
                     rdb.set('s-object', exe)
                     rdb.set('s-time', t)
                     rdb.set('s-array', array)
-                    rdb.set('text', str(cli.get('text-t').decode('utf-8')))
+                    rdb.set('text', str(cli.get('text').decode('utf-8')))
 
                     print("fire scan")
                     print(exe)
