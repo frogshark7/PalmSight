@@ -35,9 +35,7 @@ def runner():
 	redis_conn = Redis()
 	q = Queue(is_async=False,connection=redis_conn)
 	while(True):
-	    print('here2')
 	    job = q.enqueue(v3, yolo)
-	    print('here3')
 	    yolo = job.result
 	    job = q.enqueue(mrcnn, rcnn)
 	    rcnn = job.result

@@ -187,8 +187,8 @@ def once():
         #start = db.reference("status/start")
         start = rdb.get('start').decode('utf-8')
         con = rdb.get('confirm').decode('utf-8')
-        print(con)
-        print("start:" + start)
+        #print(con)
+       # print("start:" + start)
         ref = rdb.get('mode').decode('utf-8')
         #if(int(ref.get()) == 0 and int(con.get()) == 0):
         if(int(ref) == 0 and int(con) == 0):
