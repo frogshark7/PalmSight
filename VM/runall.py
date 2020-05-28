@@ -47,7 +47,7 @@ firebase_admin.initialize_app(cred, {
 '''
 def v3():
     init = 0
-    prev = 0
+    prev = 0    
 
     while(True):
         init = int(cli.get('read').decode('utf-8'))
@@ -190,6 +190,7 @@ def once():
         #start = db.reference("status/start")
         start = rdb.get('start').decode('utf-8')
         con = rdb.get('confirm').decode('utf-8')
+        print(con)
         ref = rdb.get('mode').decode('utf-8')
         #if(int(ref.get()) == 0 and int(con.get()) == 0):
         if(int(ref) == 0 and int(con) == 0):
