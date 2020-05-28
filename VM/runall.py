@@ -50,6 +50,8 @@ firebase_admin.initialize_app(cred, {
 '''
 def v3(prev):
     init = int(cli.get('read').decode('utf-8'))
+    print(init)
+    print(prev)
     if init != prev:
         start = time.time()
         with open("send.png", "rb") as image:
