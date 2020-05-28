@@ -38,18 +38,11 @@ def runner():
 	    print('here2')
 	    job = q.enqueue(v3, yolo)
 	    print('here3')
-	    print(job.result)
-	    '''
 	    yolo = job.result
 	    job = q.enqueue(mrcnn, rcnn)
-	    while(job.result is None):
-	        pass
 	    rcnn = job.result
 	    job = q.enqueue(text, textp)
-	    while(job.result is None):
-	        pass
 	    textp = job.result
-	    '''
 reset()
 p7 = Process(target=once)
 p7.start()
