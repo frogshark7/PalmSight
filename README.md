@@ -21,7 +21,7 @@ AWS Machine Learning Configurations
 
 ![alt text](https://github.com/eugenechoi2004/palmsight/blob/master/rpi/wiring.png)
 
-## Installation
+## Installation/Setup
 
 On both your local machine, raspberry pi, and AWS Cli run:
 ```
@@ -64,7 +64,7 @@ python3 yolo3.py delete
 python3 rcnn.py delete
 ```
 
-4. Running the programs
+## Testing
 
 On the Raspberry pi:
 
