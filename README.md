@@ -2,6 +2,8 @@
 
 The PalmSight as a visual aid for the blind. The PalmSight is a glove equipped with a raspberry pi that takes a picture of the user’s surroundings. It then uses several CV models to identify and locate the objects or text in the image. With this device, the visually impaired will have a device that describes their surroundings, helps them locate specific objects in real-time, and keep track of their possessions.
 
+View the Video at: https://vimeo.com/423494402
+
 ## Setup
 
 Below are some of the components used in making the PalmSight
