@@ -216,7 +216,7 @@ def once():
             start = time.time()
             cli.set('read', int(cli.get('read').decode('utf-8')) + 1)
             while(True):
-                if int(cli.get('confirm').decode('utf-8')) == 4:
+                if int(cli.get('confirm').decode('utf-8')) == 3:
                     print('here')
                     #ref = db.reference("scan")
                     #ref2 = db.reference("date-time")
@@ -245,6 +245,7 @@ def once():
                     print("Total", end - start)
                     done = 1
                     break
+
 def reset():
     cli.set('confirm', 0)
     cli.set('read', 0)
