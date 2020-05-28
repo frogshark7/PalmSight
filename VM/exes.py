@@ -6,12 +6,12 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 from PIL import Image
-
+'''
 cred = credentials.Certificate("fire-sdk.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://fire-30e38.firebaseio.com/'
 })
-
+'''
 cli = Redis('localhost')
 init = 0
 prev = 0
