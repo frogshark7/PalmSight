@@ -209,6 +209,7 @@ def once():
             start = time.time()
             cli.set('read', int(cli.get('read').decode('utf-8')) + 1)
             while(True):
+                print('here')
                 if int(cli.get('confirm').decode('utf-8')) == 3:
                     print('here')
                     #ref = db.reference("scan")
