@@ -248,32 +248,6 @@ def reset():
     cli.set('writepythia', '')
     cli.set('exe', '')
     cli.set('array', '[]')
-
-if __name__ == '__main__':
-    reset()
-    yolo = 0
-    rcnn = 0
-    textp = 0
-    redis_conn = Redis()
-    q = Queue(is_async=False,connection=redis_conn)
-    while(True):
-        job = q.enqueue(v3, yolo)
-        while(job.result is None):
-            pass
-        yolo = job.result
-        job = q.enqueue(mrcnn, rcnn)
-        while(job.result is None):
-            pass
-        rcnn = job.result
-        job = q.enqueue(text, textp)
-        while(job.result is None):
-            pass
-        textp = job.result
-    p7 = Process(target=once)
-    p7.start()
-    p8 = Process(target=check)
-    p8.start()
-    
 #    p8 = Process(target=pythia)
 #    p8.start()
 #    p9 = Process(target=caption)
