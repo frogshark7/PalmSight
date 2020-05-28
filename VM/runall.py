@@ -217,6 +217,7 @@ def once():
             cli.set('read', int(cli.get('read').decode('utf-8')) + 1)
             while(True):
                 if int(cli.get('confirm').decode('utf-8')) == 4:
+                    print('here')
                     #ref = db.reference("scan")
                     #ref2 = db.reference("date-time")
                     #ref3 = db.reference("log")
