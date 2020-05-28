@@ -255,7 +255,7 @@ if __name__ == '__main__':
     rcnn = 0
     textp = 0
     redis_conn = Redis()
-    q = Queue(connection=redis_conn)
+    q = Queue(is_async=False,connection=redis_conn)
     while(True):
         job = q.enqueue(v3, yolo)
         while(job.result is None):
