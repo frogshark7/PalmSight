@@ -55,6 +55,7 @@ def v3(prev):
         with open("send.png", "rb") as image:
             f = image.read()
             b = bytearray(f)
+            print('here')
             jsonstring = (client2.invoke_endpoint(
             EndpointName='sample-endpoint-134EEA74-A9CA-4B4F-8DB1-B9721EEFC63B-2',\
             Body=b,\
@@ -92,6 +93,7 @@ def mrcnn(prev):
         with open("send.png", "rb") as image:
             f = image.read()
             b = bytearray(f)
+            print('here')
             jsonstring = (client2.invoke_endpoint(
             EndpointName='sample-endpoint-134EEA74-A9CA-4B4F-8DB1-B9721EEFC63B-1',\
             Body=b,\
