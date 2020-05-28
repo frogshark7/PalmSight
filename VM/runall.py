@@ -167,7 +167,6 @@ def check():
     prev = 0
     init = 0
     while(True):
-        print("here")
         init = int(cli.get('confirm').decode('utf-8'))
         if init == 2:
             print("exe ran")
@@ -177,6 +176,7 @@ def once():
     done = 0
     #cred = credentials.Certificate("fire-sdk.json")
     #app2 = firebase_admin.initialize_app(cred, {'storageBucket': 'fire-30e38.appspot.com'}, name='storage2')
+    print('here')
     while(True):
         #ref = db.reference("status/mode")
         #con = db.reference("status/confirm")
