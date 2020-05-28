@@ -9,13 +9,16 @@ r = Redis(
     port=11474, 
     password='IwNcW6koViX3AowEKOTNAb35tEcJwvsL')
 
-def start():
-    ##reset  all rediis
+def clear():
     r.set('start', 0)
     r.set('confirm', 0)
     r.set('s-object', "")
     r.set('s-time', "")
     r.set('s-array', "")
+
+def start():
+    ##reset  all rediis
+    clear()
 
     im = Image.open('image.jpg')
     im_resize = im.resize((500, 500))
@@ -32,17 +35,16 @@ def getResults():
         ob = r.get('s-object')
         t = r.get('s-time')
         ar = r.get('s-array')
-        text = r.get("text")
         try:
+            print(r.get('confirm').decode('utf-8'))
             if(int(r.get('confirm').decode('utf-8')) == 1):
                 print(ob.decode('utf-8'))
                 print(t.decode('utf-8'))
                 print(ar.decode('utf-8'))
-                print(text.decode('utf-8'))
                 print("Done")
                 return
         except:
-            pass
+            print(r.get('confirm').decode('utf-8'))
 
 if __name__ == '__main__':
     print("starting now")

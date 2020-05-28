@@ -1,6 +1,6 @@
 # PalmSight
 
-The PalmSight as a visual aid for the blind. The PalmSight is a glove equipped with a raspberry pi that takes a picture of the user’s surroundings. It then uses several CV models to identify and locate the objects or text in the image. With this device, the visually impaired will have a device that describes their surroundings, helps them locate specific objects in real-time, and keep track of their possessions. See the video: https://youtu.be/_9c493aPXFI
+The PalmSight as a visual aid for the blind. The PalmSight is a glove equipped with a raspberry pi that takes a picture of the user’s surroundings. It then uses several CV models to identify and locate the objects or text in the image. With this device, the visually impaired will have a device that describes their surroundings, helps them locate specific objects in real-time, and keep track of their possessions.
 
 ## Setup
 
@@ -14,17 +14,21 @@ LSM9DS1
 4  Coin Vibration motors
 4 LEDs
 Push button for the rpi
-(optional) portable power bank 
+(optional) portable power bank
 AWS Machine Learning Configurations
 
 ## Wiring the Raspberry Pi Zero W
 
 ![alt text](https://github.com/eugenechoi2004/palmsight/blob/master/rpi/wiring.png)
 
-## Installation
+## Installation/Setup
 
-On both your local machine and  raspberry pi, run:
-git clone https://github.com/eugenechoi2004/palmsight.git
+On both your local machine, raspberry pi, and AWS Cli run:
+```
+git clone https://github.com/frogshark7/PalmSight.git
+```
+Configure your AWS credentials and install the necessary libraries through requirements.txt
+Follow the steps given by the AWS Marketplace guide to configure the model in the AWS CLI environment
 
 1. Downloading the App
 
@@ -37,7 +41,7 @@ Then launch
 
 2. Setting up the Raspberry pi
 
-On your raspberry pi: 
+On your raspberry pi:
 
 ```
 cd rpi
@@ -46,10 +50,14 @@ pip install -r requirements.txt
 
 3. Setting up the models and deploying on SageMaker
 
+<<<<<<< HEAD
 Configure your AWS credentials and install the necessary libraries through requirements.txt
 Follow the steps given by the AWS Marketplace guide to configure the model in the AWS CLI environment
 
 To configure both model's endpoints run:
+=======
+To configure the YOLO and RCNN models' endpoints run:
+>>>>>>> 8013954a95a0e957fa522cbbb68a46c92e8ff668
 
 ```
 python3 yolo3.py
