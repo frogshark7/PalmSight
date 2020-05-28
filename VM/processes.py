@@ -36,8 +36,8 @@ redis_conn = Redis()
 q = Queue(connection=redis_conn)
 p7 = Process(target=once)
 p7.start()
-p8 = Process(target=check)
-p8.start()
+#p8 = Process(target=check)
+#p8.start()
 
 while(True):
     job = q.enqueue(v3, yolo)
