@@ -28,19 +28,11 @@ from runall import reset
 from runall import once
 from runall import check
 from runall import v3,mrcnn,text
-reset()
-yolo = 0
-rcnn = 0
-textp = 0
-redis_conn = Redis()
-q = Queue(connection=redis_conn)
-p7 = Process(target=once)
-p7.start()
-p8 = Process(target=check)
-p8.start()
-
-while(True):
+def runner():
+	while(True):
+	print('here2')
     job = q.enqueue(v3, yolo)
+    print('here3')
     while(job.result is None):
         pass
     yolo = job.result
@@ -52,3 +44,16 @@ while(True):
     while(job.result is None):
         pass
     textp = job.result
+reset()
+yolo = 0
+rcnn = 0
+textp = 0
+redis_conn = Redis()
+q = Queue(connection=redis_conn)
+p7 = Process(target=once)
+p7.start()
+p8 = Process(target=check)
+p8.start()
+p9 = Process(target=runner)
+p9.start()
+
