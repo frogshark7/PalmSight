@@ -21,7 +21,7 @@ AWS Machine Learning Configurations
 
 ## Wiring the Raspberry Pi Zero W
 
-![alt text](https://github.com/eugenechoi2004/palmsight/blob/master/rpi/wiring.png)
+![alt text](https://github.com/frogshark7/palmsight/blob/master/rpi/wiring.png)
 
 ## Installation/Setup
 
