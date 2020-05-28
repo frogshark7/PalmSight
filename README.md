@@ -52,14 +52,12 @@ pip install -r requirements.txt
 
 3. Setting up the models and deploying on SageMaker
 
-<<<<<<< HEAD
 Configure your AWS credentials and install the necessary libraries through requirements.txt
 Follow the steps given by the AWS Marketplace guide to configure the model in the AWS CLI environment
 
 To configure both model's endpoints run:
 =======
 To configure the YOLO and RCNN models' endpoints run:
->>>>>>> 8013954a95a0e957fa522cbbb68a46c92e8ff668
 
 ```
 python3 yolo3.py
