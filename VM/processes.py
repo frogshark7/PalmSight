@@ -30,7 +30,7 @@ from runall import check
 from runall import v3,mrcnn,text
 def runner():
 	while(True):
-		print('here2')
+	    print('here2')
 	    job = q.enqueue(v3, yolo)
 	    print('here3')
 	    while(job.result is None):
