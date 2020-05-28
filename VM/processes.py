@@ -30,20 +30,20 @@ from runall import check
 from runall import v3,mrcnn,text
 def runner():
 	while(True):
-	print('here2')
-    job = q.enqueue(v3, yolo)
-    print('here3')
-    while(job.result is None):
-        pass
-    yolo = job.result
-    job = q.enqueue(mrcnn, rcnn)
-    while(job.result is None):
-        pass
-    rcnn = job.result
-    job = q.enqueue(text, textp)
-    while(job.result is None):
-        pass
-    textp = job.result
+		print('here2')
+	    job = q.enqueue(v3, yolo)
+	    print('here3')
+	    while(job.result is None):
+	        pass
+	    yolo = job.result
+	    job = q.enqueue(mrcnn, rcnn)
+	    while(job.result is None):
+	        pass
+	    rcnn = job.result
+	    job = q.enqueue(text, textp)
+	    while(job.result is None):
+	        pass
+	    textp = job.result
 reset()
 yolo = 0
 rcnn = 0
