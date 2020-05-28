@@ -23,8 +23,12 @@ AWS Machine Learning Configurations
 
 ## Installation
 
-On both your local machine and  raspberry pi, run:
-git clone https://github.com/eugenechoi2004/palmsight.git
+On both your local machine, raspberry pi, and AWS Cli run:
+```
+git clone https://github.com/frogshark7/PalmSight.git
+```
+Configure your AWS credentials and install the necessary libraries through requirements.txt
+Follow the steps given by the AWS Marketplace guide to configure the model in the AWS CLI environment
 
 1. Downloading the App
 
@@ -46,10 +50,7 @@ pip install -r requirements.txt
 
 3. Setting up the models and deploying on SageMaker
 
-Configure your AWS credentials and install the necessary libraries through requirements.txt
-Follow the steps given by the AWS Marketplace guide to configure the model in the AWS CLI environment
-
-To configure both model's endpoints run:
+To configure the YOLO and RCNN models' endpoints run:
 
 ```
 python3 yolo3.py
