@@ -38,6 +38,7 @@ p7 = Process(target=once)
 p7.start()
 p8 = Process(target=check)
 p8.start()
+'''
 while(True):
     job = q.enqueue(v3, yolo)
     while(job.result is None):
@@ -50,4 +51,4 @@ while(True):
     job = q.enqueue(text, textp)
     while(job.result is None):
         pass
-    textp = job.result
+    textp = job.result'''
