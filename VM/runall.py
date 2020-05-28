@@ -167,6 +167,7 @@ def check():
     prev = 0
     init = 0
     while(True):
+        print("here")
         init = int(cli.get('confirm').decode('utf-8'))
         if init == 2:
             print("exe ran")
