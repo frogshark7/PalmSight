@@ -33,13 +33,13 @@ def runner():
 	rcnn = 0
 	textp = 0
 	redis_conn = Redis()
-	q = Queue(connection=redis_conn)
+	q = Queue(is_async=False,connection=redis_conn)
 	while(True):
 	    print('here2')
 	    job = q.enqueue(v3, yolo)
 	    print('here3')
-	    while(job.result is None):
-	        pass
+	    print(job.result)
+	    '''
 	    yolo = job.result
 	    job = q.enqueue(mrcnn, rcnn)
 	    while(job.result is None):
@@ -49,6 +49,7 @@ def runner():
 	    while(job.result is None):
 	        pass
 	    textp = job.result
+	    '''
 reset()
 p7 = Process(target=once)
 p7.start()
