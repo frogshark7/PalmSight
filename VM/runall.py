@@ -164,7 +164,7 @@ def text():
             ''''
             ref = db.reference()
             ref.update({"text":text})'''
-            rdb.set('text', text)
+            cli.set('text', text)
             print("text time:", time.time() - s, "\n")
         prev = init
 
