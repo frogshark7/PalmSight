@@ -39,10 +39,12 @@ except:
     rdb.set('mode', 0)
     rdb.set('confirm', 0)
     rdb.set('start', 0)
+    '''
 cred = credentials.Certificate("fire-sdk.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://fire-30e38.firebaseio.com/'
 })
+'''
 def v3():
     init = 0
     prev = 0
