@@ -1,6 +1,6 @@
 # PalmSight
 
-The PalmSight as a visual aid for the blind. The PalmSight is a glove equipped with a raspberry pi that takes a picture of the user’s surroundings. It then uses several CV models to identify and locate the objects or text in the image. With this device, the visually impaired will have a device that describes their surroundings, helps them locate specific objects in real-time, and keep track of their possessions. See the video: https://youtu.be/_9c493aPXFI
+The PalmSight as a visual aid for the blind. The PalmSight is a glove equipped with a raspberry pi that takes a picture of the user’s surroundings. It then uses several CV models to identify and locate the objects or text in the image. With this device, the visually impaired will have a device that describes their surroundings, helps them locate specific objects in real-time, and keep track of their possessions.
 
 ## Setup
 
@@ -79,10 +79,11 @@ cd VM
 python3 runall.py
 ```
 
-To test on the program on the VM, simultaneously run:
+To test on the program, on your local machine:
 
 ```
-python3 once.py
+cd local_test
+python3 rredis.py
 ```
 
 ## Using the Glove and App
