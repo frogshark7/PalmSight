@@ -15,7 +15,7 @@ firebase_admin.initialize_app(cred, {
 cli = Redis('localhost')
 init = 0
 prev = 0
-pic = Image.open("../send.jpg")
+pic = Image.open("send.png")
 width, height = pic.size
 img_center = [width/2, height/2]
 
