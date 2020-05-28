@@ -178,7 +178,7 @@ def check():
             print("exe ran")
             exe()
         prev = init
-ef once():
+def once():
     done = 0
     #cred = credentials.Certificate("fire-sdk.json")
     #app2 = firebase_admin.initialize_app(cred, {'storageBucket': 'fire-30e38.appspot.com'}, name='storage2')
