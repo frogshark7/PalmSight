@@ -24,6 +24,8 @@ import json
 from PIL import Image
 import io
 client = boto3.client('sagemaker')
+client3 = boto3.client('textract')
+
 client2 = boto3.client('sagemaker-runtime')
 cli = Redis('localhost')
 rdb = Redis(
@@ -129,7 +131,7 @@ def text():
             with open("send.png", "rb") as image:
                 f = image.read() 
                 b = bytearray(f)
-                response = client.detect_document_text(
+                response = client3.detect_document_text(
                 Document={
                     'Bytes': b
                 }
